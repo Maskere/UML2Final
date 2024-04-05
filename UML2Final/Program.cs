@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+
+namespace PizzaStore
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BigMamma bigMamma = new BigMamma();
+            bigMamma.Test();
+        }
+    }
+}
