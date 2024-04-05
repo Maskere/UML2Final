@@ -446,7 +446,7 @@ namespace PizzaStore
                 "3. Create an order from new customer and existing pizza",
                 "4. Create an order with new customer and new pizza",
                 "5. Delete an order",
-                "6. Update and order",
+                "6. Update an order",
                 "7. Search for an order",
                 "8. Clear the list of orders",
                 "9. Print the list of orders",
@@ -495,7 +495,7 @@ namespace PizzaStore
                                         OrderCatalog.SeachForOrderById(orderId);
                                         if (OrderCatalog.SeachForOrderById(orderId) != null)
                                         {
-                                            Console.WriteLine($"You are about to overrite an existing order. \nAre you sure you want to overwrite {OrderCatalog.SeachForOrderById(orderId)}?\ny/n");
+                                            Console.WriteLine($"You are about to overrite a existing order. \nAre you sure you want to overwrite {OrderCatalog.SeachForOrderById(orderId)}?\ny/n");
                                             string overrideString = Console.ReadLine();
                                             if (overrideString == "y")
                                             {
@@ -511,9 +511,9 @@ namespace PizzaStore
                                 }
                                 else { Console.Clear(); Console.WriteLine("Input is invalid"); }
                             }
-                            else { Console.Clear(); Console.WriteLine($"There were no pizza with ID {pizzaToOrderInt}"); }
+                            else { Console.Clear(); Console.WriteLine($"There are no pizza with ID {pizzaToOrderInt}"); }
                         }
-                        else { Console.Clear(); Console.WriteLine($"There were no customer with ID {customerToOrderInt}"); }
+                        else { Console.Clear(); Console.WriteLine($"There are no customer with ID {customerToOrderInt}"); }
 
                         break;
                     case 2:
@@ -548,23 +548,19 @@ namespace PizzaStore
                         Console.WriteLine($"You updated order {updateOrder}");
                         break;
                     case 7:
-                        //Console.WriteLine("Find a customer by a name: ");
-                        //string findCustomer = Console.ReadLine();
-                        //_customerCatalog.SearchCustomerByName(findCustomer);
-                        //Console.WriteLine();
-                        //Console.ReadKey();
+
                         break;
                     case 8:
-                        Console.WriteLine("Are you sure you want to clear the list of customers?\ny/n");
+                        Console.WriteLine("Are you sure you want to clear the list of orders?\ny/n");
                         string answer = Console.ReadLine();
                         if (answer == "y")
                         {
-                            CustomerCatalog.Clear();
-                            Console.WriteLine("You cleared the list of customers\n");
+                            OrderCatalog.Clear();
+                            Console.WriteLine("You cleared the list of orders");
                         }
                         else
                         {
-                            Console.WriteLine("You did not clear the list of customers");
+                            Console.WriteLine("You did not clear the list of orders");
                         }
                         break;
                     case 9:

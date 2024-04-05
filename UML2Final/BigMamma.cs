@@ -62,9 +62,6 @@ namespace PizzaStore
             Order order3 = new Order(customer3, pizza3, 2, 3);
             OrderCatalog.AddAnOrderToTheList(order3);
 
-            order1.CalculateTotalPrice();
-            Invoice invoice1 = new Invoice(order1);
-            Console.Write(invoice1);
             new UserDialog(PizzaCatalog, CustomerCatalog, OrderCatalog).MainMenu();
         }
         public override string ToString()
