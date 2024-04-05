@@ -14,7 +14,6 @@ namespace PizzaStore
         List<Customer> Customers;
         public CustomerCatalog()
         {
-            new Customer("", 0);
             Customers = new List<Customer>(new Customer[10]);
         }
         public int Count

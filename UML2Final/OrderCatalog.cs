@@ -16,8 +16,6 @@ namespace PizzaStore
         public OrderCatalog()
         {
             Orders = new List<Order>(new Order[10]);
-            Customers = new CustomerCatalog();
-            Pizzas = new PizzaCatalog();
             _customer = new Customer("", 0);
             _pizza = new Pizza("", 0, 0);
         }
