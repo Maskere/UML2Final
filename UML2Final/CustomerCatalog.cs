@@ -52,18 +52,13 @@ namespace PizzaStore
                 Customers.Insert(updatedCustomer.CustomerId, updatedCustomer);
             }
         }
-        //public Customer SearchCustomerByName(string customerName)
-        //{
-        //    foreach (Customer customer in Customers)
-        //    {
-        //        for (int i = 0; i < Customers.Count; i++)
-        //        {
-        //            if (Customers[i].CustomerName == customerName)
-        //                return Customers[i];
-        //        }
-        //    }
-        //    return;
-        //}
+        public void SearchCustomerByName(string customerName)
+        {
+            foreach (Customer customer in Customers)
+            {
+                Console.WriteLine($"{customer.CustomerName}");
+            }
+        }
         public void Clear()
         {
             Customers.Clear();
