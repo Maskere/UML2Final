@@ -52,12 +52,10 @@ namespace PizzaStore
                 Customers.Insert(updatedCustomer.CustomerId, updatedCustomer);
             }
         }
-        public void SearchCustomerByName(string customerName)
+        public Customer SearchCustomerByName(string customerName)
         {
-            foreach (Customer customer in Customers)
-            {
-                Console.WriteLine($"{customer.CustomerName}");
-            }
+
+            return null;
         }
         public void Clear()
         {
@@ -74,7 +72,7 @@ namespace PizzaStore
             {
                 if (customer != null)
                 {
-                    Console.WriteLine($"| {customer.CustomerId} {customer} |");
+                    Console.WriteLine($"| {customer} |");
                 }
                 else
                 {

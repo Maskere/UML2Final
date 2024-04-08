@@ -90,7 +90,8 @@ namespace PizzaStore
             {
                 if (order != null)
                 {
-                    Console.WriteLine($"| {order} |");
+                    order.CalculateTotalPrice();
+                    Console.WriteLine($"| {order} | Total price: {order.TotalPrice} |");
                 }
                 else
                 {

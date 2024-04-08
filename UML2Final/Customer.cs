@@ -51,7 +51,7 @@ namespace PizzaStore
         #region Methods
         public override string ToString()
         {
-            return $"{CustomerName}";
+            return $"{CustomerId} {CustomerName}";
         }
         #endregion
     }

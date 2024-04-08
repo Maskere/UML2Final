@@ -14,6 +14,8 @@ namespace PizzaStore
         CustomerCatalog CustomerCatalog;
         OrderCatalog OrderCatalog;
         string InvalidPizzaID = "Invalid pizza ID";
+        string InvalidCustomerID = "Invalid customer ID";
+        string InvalidOrderID = "Invalid customer ID";
         public UserDialog(PizzaCatalog menuCatalog, CustomerCatalog customerCatalog, OrderCatalog orderCatalog)
         {
             PizzaCatalog = menuCatalog;
@@ -408,10 +410,13 @@ namespace PizzaStore
                         }
                         break;
                     case 4:
-                        Console.WriteLine("Find a customer by a name: ");
+                        Console.WriteLine("Find a customer by name: ");
                         string findCustomerByNameString = Console.ReadLine();
-                        CustomerCatalog.SearchCustomerByName(findCustomerByNameString);
-                        
+                        Customer findCustomer = CustomerCatalog.SearchCustomerByName(findCustomerByNameString);
+                        if (findCustomer != null) 
+                        {
+                            Console.WriteLine("Found");
+                        }
                         break;
                     case 5:
                         Console.WriteLine("Are you sure you want to clear the list of customers?\ny/n");
@@ -696,7 +701,85 @@ namespace PizzaStore
                         break;
                     case 4:
                         //"4. Create an order with new customer and new pizza"
-
+                        Console.WriteLine("Enter a new customer name: ");
+                        string inputNewCustomerNameString = Console.ReadLine();
+                        Console.WriteLine("Enter an id number: ");
+                        string inputNewCustomerIdString = Console.ReadLine();
+                        int inputCustomerId = int.Parse(inputNewCustomerIdString);
+                        Customer customerNewCreate = CustomerCatalog.GetNewCustomer(inputNewCustomerNameString, inputCustomerId);
+                        if (customerNewCreate == null)
+                        {
+                            Console.WriteLine($"Customer with that id already exists");
+                        }
+                        else
+                        {
+                            CustomerCatalog.RemoveAt(customerNewCreate.CustomerId);
+                            CustomerCatalog.CreateACustomer(customerNewCreate);
+                            Console.WriteLine($"You created {customerNewCreate.CustomerName} with id: {customerNewCreate.CustomerId}");
+                        }
+                        //Create a pizza
+                        Console.WriteLine("Enter a new pizza name: ");
+                        string pizzaNewNameCreateString = Console.ReadLine();
+                        if (pizzaNewNameCreateString.Any(char.IsDigit))
+                        {
+                            Console.WriteLine("Invalid name");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a price: ");
+                            string pizzaPriceString = "";
+                            int pizzaPrice = 0;
+                            try
+                            {
+                                do
+                                {
+                                    pizzaPriceString = Console.ReadLine();
+                                    pizzaPrice = int.Parse(pizzaPriceString);
+                                    if (pizzaPrice < 70)
+                                    {
+                                        Console.WriteLine("Price too low. Minimum 70kr.");
+                                    }
+                                }
+                                while (pizzaPrice < 70);
+                            }
+                            catch (FormatException e) { Console.WriteLine($"Unable to parse '{pizzaPrice}' - Message: {e.Message}"); }
+                            if (pizzaPrice > 0)
+                            {
+                                Console.WriteLine("Enter a new pizza ID: ");
+                                string pizzaIdString = "";
+                                int pizzaId = 0;
+                                try
+                                {
+                                    pizzaIdString = Console.ReadLine();
+                                    pizzaId = int.Parse(pizzaIdString);
+                                }
+                                catch (FormatException e) { Console.WriteLine($"Unable to parse '{pizzaId}' - Message: {e.Message}"); }
+                                if (pizzaId <= 0) { Console.WriteLine("Invalid pizza ID"); PizzaSetting(); }
+                                Pizza pizzaCreate = PizzaCatalog.GetNewPizza(pizzaNewNameCreateString, pizzaPrice, pizzaId);
+                                if (pizzaCreate == null)
+                                {
+                                    Console.WriteLine("A pizza with that id already exists\nDo you with to overwrite?\ny/n");
+                                    string overWriteAnswer = Console.ReadLine();
+                                    if (overWriteAnswer == "y") { PizzaCatalog.UpdatePizza(new Pizza(pizzaNewNameCreateString, pizzaPrice, pizzaId)); Console.WriteLine($"Pizza was overwritten"); }
+                                    else { Console.WriteLine("Pizza was NOT overwritten"); }
+                                }
+                                else
+                                {
+                                    PizzaCatalog.RemoveAt(pizzaCreate.PizzaId);
+                                    PizzaCatalog.CreateAPizza(pizzaCreate);
+                                    Console.WriteLine($"You created {pizzaCreate.Name} with id: {pizzaCreate.PizzaId} and price: {pizzaCreate.Price}");
+                                }
+                                Console.WriteLine("Enter number of pizzas to add to the order: ");
+                                string noOfPizzasString = "";
+                                int noOfPizzasInt = 0;
+                                try { noOfPizzasString = Console.ReadLine(); noOfPizzasInt = int.Parse(noOfPizzasString); } catch (FormatException e) { Console.WriteLine(e.Message); }
+                                Console.WriteLine("Enter a new order ID: ");
+                                string orderIdString = "";
+                                int orderId = 0;
+                                try { orderIdString = Console.ReadLine(); orderId = int.Parse(orderIdString); } catch (FormatException e) { Console.WriteLine(e.Message); }
+                                OrderCatalog.AddAnOrderToTheList(OrderCatalog.GetNewOrder(customerNewCreate, pizzaCreate, noOfPizzasInt, orderId));
+                            }
+                        }
                         break;
                     case 5:
                         OrderCatalog.PrintOrderList();
