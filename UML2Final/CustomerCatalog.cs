@@ -54,7 +54,14 @@ namespace PizzaStore
         }
         public Customer SearchCustomerByName(string customerName)
         {
-
+            
+            foreach (Customer customer in Customers) 
+            {
+                if (customer != null)
+                {
+                    for (int i = 0; i < Customers.Count; i++) { Customer findCustomer = new Customer(customerName, i); ; if (string.Equals(customer.CustomerName, findCustomer.CustomerName)) return customer; }
+                }
+            }
             return null;
         }
         public void Clear()

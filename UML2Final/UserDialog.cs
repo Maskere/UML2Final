@@ -415,7 +415,11 @@ namespace PizzaStore
                         Customer findCustomer = CustomerCatalog.SearchCustomerByName(findCustomerByNameString);
                         if (findCustomer != null) 
                         {
-                            Console.WriteLine("Found");
+                            Console.WriteLine($"Found customer {findCustomer}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No customer found by '{findCustomerByNameString}'");
                         }
                         break;
                     case 5:

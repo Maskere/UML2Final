@@ -69,11 +69,11 @@ namespace PizzaStore
         }
         //public Customer SearchCustomerByName(string customerName)
         //{
-        //    foreach (Customer customer in Customers) 
+        //    foreach (Customer customer in Customers)
         //    {
-        //        Console.WriteLine($"\nFind: customer by name \"{customerName}\":{0}", Customers.Find(x => x.CustomerName.Contains(customerName))) ;
+        //        Console.WriteLine($"\nFind: customer by name \"{customerName}\":{0}", Customers.Find(x => x.CustomerName.Contains(customerName)));
         //    }
-        //    return 
+        //    return
         //}
         public void Clear()
         {
